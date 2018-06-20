@@ -1,0 +1,10 @@
+amqp==2.3.2
+billiard==3.5.0.3
+celery==4.2.0
+Django==2.0.6
+eventlet==0.23.0
+greenlet==0.4.13
+kombu==4.2.1
+pytz==2018.4
+redis==2.10.6
+vine==1.1.4
