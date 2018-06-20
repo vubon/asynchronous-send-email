@@ -20,15 +20,16 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 
 # The decorator is used for recognizing a periodic task
-#@app.on_after_configure.connect
-# def setup_periodic_tasks(sender, **kwargs):
-#     # Sending the email every 10 Seconds
-#     # sender.add_periodic_task(10.0, send_feedback_email_task.s('Vubon', 'vubon.roy@gmail.com', 'Hello'),
-#     #                          name='add every 10')
-#     # Executes every Monday morning at 7:30 a.m.
-#     sender.add_periodic_task(
-#         crontab(hour=7, minute=30, day_of_week=1),
-#         send_feedback_email_task.s('Vubon', 'vubon.roy@gmail.com', 'Hello'), )
+# If you do not like this type of periodic task setting then you old settings
+@app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    # Sending the email every 50 Seconds
+    sender.add_periodic_task(50.0, send_feedback_email_task.s('Vubon', 'vubon.roy@gmail.com', 'Hello'),
+                             name='add every 10')
+    # Executes every Monday morning at 7:30 a.m.
+    sender.add_periodic_task(
+        crontab(hour=7, minute=30, day_of_week=1),
+        send_feedback_email_task.s('Vubon', 'vubon.roy@gmail.com', 'Hello'), )
 
 
 # The task to be processed by the worker
